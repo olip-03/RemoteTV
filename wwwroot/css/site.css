@@ -17,6 +17,12 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
+content {
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+
+footer {
+  margin: 0px;
+  padding: 0px;
 }

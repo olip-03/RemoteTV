@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar fixed-top navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">RemoteTV</a>
 
@@ -22,6 +22,9 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Browse/Index">Browse</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Settings">Settings</a>
                         </li>
                     </ul>
@@ -29,11 +32,20 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+
+    <div class="container" style="padding-top: 70px; padding-bottom: 70px;">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
+
+    <footer class="navbar fixed-bottom navbar-light bg-white border-top box-shadow">
+        <div class="container">
+            <img src="~/images/regular/circle-stop.svg" style="height: 60px; width: 60px">
+            <h6>Currently Playing:</h6>
+            <p>Nothing</p>
+        </div>
+    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

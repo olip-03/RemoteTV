@@ -1,9 +1,14 @@
+using System.Runtime.InteropServices;
 using RemoteTV;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Load all settings into memory
 ProgramSettings.UpdateFolders();
+if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+{
+    ProgramSettings.runtime = "Windows";
+}
 
 // Add services to the container.
 builder.Services.AddRazorPages();

@@ -1,0 +1,114 @@
+@page
+@model RemoteTV.Pages.Browse.Index
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+    }
+
+    .box {
+        display: flex;
+        flex-flow: column;
+        height: 100%;
+    }
+
+    .box .row {
+        border: 1px dotted grey;
+    }
+
+    .box .row.header {
+        flex: 0 1 auto;
+        /* The above is shorthand for:
+  flex-grow: 0,
+  flex-shrink: 1,
+  flex-basis: auto
+  */
+    }
+
+    .box .row.content {
+        flex: 1 1 auto;
+    }
+
+    .box .row.footer {
+        flex: 0 1 40px;
+    }
+</style>
+
+@if (@Model.directory == null)
+{
+    return;
+}
+@if (@Model.directory == "driveSelection" && ProgramSettings.runtime == "Windows")
+{ // Only if we're also running windows :)
+    @foreach (var dir in ProgramSettings.GetDrives())
+    {
+        string[] paths = dir.Split('\\');
+        string lastPath = "";
+        <div class="form-group row">
+            <div class="col">
+                <button type="submit" form="form1" name="dir" class="form-control d-flex" value="@dir">
+                    <img src="~/images/regular/hard-drive.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
+                    <a href="Browse?dir=@dir">@dir</a>
+                </button>
+            </div>
+        </div>
+    }
+    return;
+}
+
+<form id="form1" class="row content" method="GET">
+    @* Back button *@
+    <div class="form-group row">
+        <div class="col">
+            @if (ProgramSettings.IsTopLevel(@Model.directory))
+            {
+                <button type="submit" form="form1" name="dir" class="form-control d-flex" value="driveSelection">
+                    <img src="~/images/regular/hard-drive.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
+                    <a href="Browse?dir=driveSelection">Drives</a>
+                </button>
+            }
+            else
+            {
+                string parent = ProgramSettings.GetParent(@Model.directory);
+                <button type="submit" form="form1" name="dir" class="form-control d-flex" value="@parent">
+                    <img src="~/images/regular/circle-left.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
+                    <a href="Browse?dir=@parent">@parent</a>
+                </button>
+            }
+        </div>
+    </div>
+
+    @* Represents folders *@
+    @foreach (var dir in ProgramSettings.GetFolders(@Model.directory))
+    {
+        string[] paths = dir.Split('\\');
+        string lastPath = "";
+        <div class="form-group row">
+            <div class="col">
+                <button type="submit" form="form1" name="dir" class="form-control d-flex" value="@dir">
+                    <img src="~/images/regular/folder.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
+                    <a href="Browse?dir=@dir">@dir</a>
+                </button>
+            </div>
+        </div>
+    }
+
+    @* Represents files *@
+    @foreach (var dir in ProgramSettings.GetFiles(@Model.directory))
+    {
+        string[] paths = dir.Split('\\');
+        <div class="form-group row">
+            <div class="col">
+                <button type="submit" form="form1" name="dir" class="form-control d-flex" value="@dir">
+                    <img src="~/images/regular/file.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
+                    <a href="Browse?dir=@dir">@dir</a>
+                </button>
+            </div>
+        </div>
+    }
+</form>

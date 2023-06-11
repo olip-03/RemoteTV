@@ -9,19 +9,28 @@
     @* You can keep adding these as they are required *@
     <div class="form-group row">
         <div class="col-3">
-            <label>Login Password:</label>
+            <label asp-for="settings.password">Login Password:</label>
         </div>
         <div class="col-5">
-            <input type="text" class="form-control" value="@ProgramSettings.loginPassword"/>
+            <input type="text" class="form-control" asp-for="settings.password" value="@ProgramSettings.loginPassword"/>
         </div>
     </div><br>
 
     <div class="form-group row">
         <div class="col-3">
-            <label>Media Directory:</label>
+            <label asp-for="settings.mediaDirectory">Media Directory:</label>
         </div>
         <div class="col-5">
-            <input type="text" class="form-control" value="@ProgramSettings.mediaDirectory"/>
+            <input type="text" class="form-control" asp-for="settings.mediaDirectory" value="@ProgramSettings.mediaDirectory"/>
+        </div>
+    </div><br>
+
+    <div class="form-group row">
+        <div class="col-3">
+            <label asp-for="settings.broadcastFrequency">Broadcast Frequency:</label>
+        </div>
+        <div class="col-5">
+            <input type="number" step=0.01 class="form-control" asp-for="settings.broadcastFrequency" value="@ProgramSettings.broadcastFrequency"/>
         </div>
     </div><br>
 
