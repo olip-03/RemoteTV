@@ -7,7 +7,8 @@ namespace RemoteTV
         public static string loginPassword = "P@ssword";
         public static string mediaDirectory = @"/";
         public static float broadcastFrequency = 46.25f;
-        public static bool 
+        public static bool TXRFAmp = false;
+        public static int TXGain = 0;
         public static string runtime = "Linux";
 
         public static bool isPlaying = false;
@@ -90,11 +91,21 @@ namespace RemoteTV
         }
         public static void PlayMedia(string dir)
         {
+            // Kill all past
+            StopMedia();
             isPlaying = true;
 
             ProcessStartInfo startInfo = new ProcessStartInfo();        
             startInfo.FileName = @"hacktv";
-            startInfo.Arguments = $"-m g -f {broadcastFrequency * 1000000} -s 16000000 -g 0 \"{dir}\"";
+
+            string args = $"-m g -f {broadcastFrequency * 1000000} -s 16000000 -g {TXGain} ";
+            if(TXRFAmp)
+            {
+                args += "--amp ";
+            }
+            args += $"\"{dir}\"";
+
+            startInfo.Arguments = args;
             if(startInfo != null)
             {
                 try
@@ -115,7 +126,7 @@ namespace RemoteTV
                 // now check the modules of the process
                 foreach (ProcessModule module in process.Modules)
                 {
-                    if (module.FileName.Equals("MyProcess.exe"))
+                    if (module.FileName.Equals("hacktv.exe"))
                     {
                         process.Kill();
                     } else 
