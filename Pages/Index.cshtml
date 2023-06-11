@@ -1,0 +1,81 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<style>
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+    }
+
+    .box {
+        display: flex;
+        flex-flow: column;
+        height: 100%;
+    }
+
+    .box .row {
+        border: 1px dotted grey;
+    }
+
+    .box .row.header {
+        flex: 0 1 auto;
+        /* The above is shorthand for:
+  flex-grow: 0,
+  flex-shrink: 1,
+  flex-basis: auto
+  */
+    }
+
+    .box .row.content {
+        flex: 1 1 auto;
+    }
+
+    .box .row.footer {
+        flex: 0 1 40px;
+    }
+</style>
+
+<form id="form1" class="row content" method="POST">
+    @foreach (var dir in ProgramSettings.folders)
+    {
+        string[] paths = dir.Split('\\');
+        <div class="form-group row">
+            <div class="col">
+                <button type="submit" form="form1" name="submit" class="form-control d-flex" value="@dir">
+                    <img src="~/images/regular/folder.svg" style="height: 30px; margin: 0px 10px 0px 0px">
+                    <nav aria-label="breadcrumb" style="margin: 0px">
+                        <ol class="breadcrumb" style="margin: 0px">
+                            @foreach (var path in paths)
+                            {
+                                <li class="breadcrumb-item"><a href="#">@path</a></li>
+                            }
+                        </ol>
+                    </nav>
+                </button>
+            </div>
+        </div>
+    }
+    @foreach (var dir in ProgramSettings.files)
+    {
+        string[] paths = dir.Split('\\');
+        <div class="form-group row">
+            <div class="col">
+                <button type="submit" form="form1" name="submit" class="form-control d-flex" value="@dir">
+                    <img src="~/images/regular/file.svg" style="height: 30px; margin: 0px 10px 0px 0px">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" style="margin: 0px">
+                            @foreach (var path in paths)
+                            {
+                                <li class="breadcrumb-item"><a href="#">@path</a></li>
+                            }
+                        </ol>
+                    </nav>
+                </button>
+            </div>
+        </div>
+    }
+</form>

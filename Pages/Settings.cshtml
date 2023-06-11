@@ -1,0 +1,33 @@
+﻿@page
+@model SettingsModel
+@{
+    ViewData["Title"] = "Settings";
+}
+<h1>@ViewData["Title"]</h1>
+
+<form method="post">
+    @* You can keep adding these as they are required *@
+    <div class="form-group row">
+        <div class="col-3">
+            <label>Login Password:</label>
+        </div>
+        <div class="col-5">
+            <input type="text" class="form-control" value="@ProgramSettings.loginPassword"/>
+        </div>
+    </div><br>
+
+    <div class="form-group row">
+        <div class="col-3">
+            <label>Media Directory:</label>
+        </div>
+        <div class="col-5">
+            <input type="text" class="form-control" value="@ProgramSettings.mediaDirectory"/>
+        </div>
+    </div><br>
+
+    <div class="form-group row">
+        <div class="col-3">
+            <input type="submit" class="btn btn-primary" value="Save All">
+        </div>
+    </div>
+</form>
