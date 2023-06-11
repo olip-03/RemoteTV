@@ -20,6 +20,8 @@ public class SettingsModel : PageModel
             settings.password = ProgramSettings.loginPassword;
             settings.mediaDirectory = ProgramSettings.mediaDirectory;
             settings.broadcastFrequency = ProgramSettings.broadcastFrequency;
+            settings.TXRFAmp = ProgramSettings.TXRFAmp;
+            settings.TXGain = ProgramSettings.TXGain;
         }
     }
     public void OnPost()
@@ -29,6 +31,8 @@ public class SettingsModel : PageModel
             ProgramSettings.loginPassword = settings.password;
             ProgramSettings.mediaDirectory = settings.mediaDirectory;
             ProgramSettings.broadcastFrequency = settings.broadcastFrequency;
+            ProgramSettings.TXRFAmp = settings.TXRFAmp;
+            ProgramSettings.TXGain = settings.TXGain;
         }
     }
 }
@@ -37,5 +41,7 @@ public class SettingsObject
     public string password {get; set;}
     public string mediaDirectory {get; set;}
     public float broadcastFrequency { get; set;}
+    public bool TXRFAmp { get; set; } = false;
+    public int TXGain { get; set; } = 10;
 }
 

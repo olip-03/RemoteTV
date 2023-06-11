@@ -12,7 +12,7 @@ namespace RemoteTV
         public static string runtime = "Linux";
 
         public static bool isPlaying = false;
-        private static List<Process> runningProcesses = new List<Process>();
+        private static Process proc = new Process();
 
         public static List<String> folders = new List<String>();
         public static List<String> files = new List<String>();
@@ -89,52 +89,34 @@ namespace RemoteTV
             }
             return true;
         }
-        public static void PlayMedia(string dir)
+        public static async Task PlayMediaAsync(string dir)
         {
-            // Kill all past
-            StopMedia();
+            await StopMedia();
             isPlaying = true;
 
             ProcessStartInfo startInfo = new ProcessStartInfo();        
-            startInfo.FileName = @"hacktv";
+            proc.StartInfo.FileName = @"hacktv";
 
+            // Generate args
             string args = $"-m g -f {broadcastFrequency * 1000000} -s 16000000 -g {TXGain} ";
-            if(TXRFAmp)
-            {
-                args += "--amp ";
-            }
+            if(TXRFAmp) { args += "--amp "; }
             args += $"\"{dir}\"";
+            Console.WriteLine(args);
 
-            startInfo.Arguments = args;
-            if(startInfo != null)
-            {
-                try
-                {
-                    Process hacktv = Process.Start(startInfo);
-                    runningProcesses.Add(hacktv);
-                }
-                catch
-                {
-                    isPlaying = false;
-                }
-            }
+            proc.StartInfo.Arguments = args;
+            proc.Start();
         }
-        public static void StopMedia()
+        public static async Task StopMedia()
         {
-            foreach (Process process in runningProcesses)
+            if(isPlaying)
             {
-                // now check the modules of the process
-                foreach (ProcessModule module in process.Modules)
+                proc.Kill();
+                foreach (var process in Process.GetProcessesByName("hacktv"))
                 {
-                    if (module.FileName.Equals("hacktv.exe"))
-                    {
-                        process.Kill();
-                    } else 
-                    {
-                        // Process not found
-                    }
+                    process.Kill();
                 }
             }
+            await Task.Delay(250);
             isPlaying = false;
         }
     }

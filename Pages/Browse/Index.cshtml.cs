@@ -29,7 +29,7 @@ namespace RemoteTV.Pages.Browse
 
             if(ProgramSettings.isFile(directory))
             {
-                ProgramSettings.PlayMedia(dir);
+                ProgramSettings.PlayMediaAsync(dir);
                 return RedirectToAction("Index");
             }
 
