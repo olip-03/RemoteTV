@@ -17,7 +17,7 @@ namespace RemoteTV.Pages.Browse
         {
             _logger = logger;
         }
-        public IActionResult OnGet(string dir)
+        public async Task<IActionResult> OnGet(string dir)
         {
             lastDirectory = directory;
             directory = dir;
@@ -29,7 +29,7 @@ namespace RemoteTV.Pages.Browse
 
             if(ProgramSettings.isFile(directory))
             {
-                ProgramSettings.PlayMediaAsync(dir);
+                await ProgramSettings.PlayMediaAsync(dir);
                 return RedirectToAction("Index");
             }
 

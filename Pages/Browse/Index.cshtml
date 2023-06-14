@@ -43,6 +43,7 @@
 {
     return;
 }
+<h2>@Model.directory</h2>
 @if (@Model.directory == "driveSelection" && ProgramSettings.runtime == "Windows")
 { // Only if we're also running windows :)
     @foreach (var dir in ProgramSettings.GetDrives())
@@ -65,12 +66,16 @@
     @* Back button *@
     <div class="form-group row">
         <div class="col">
+            @if (@Model.directory == null) { return; }
             @if (ProgramSettings.IsTopLevel(@Model.directory))
-            {
-                <button type="submit" form="form1" name="dir" class="form-control d-flex" value="driveSelection">
+            { // Create Drives button
+                if(ProgramSettings.runtime == "Windows")
+                {
+                    <button type="submit" form="form1" name="dir" class="form-control d-flex" value="driveSelection">
                     <img src="~/images/regular/hard-drive.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
                     <a href="Browse?dir=driveSelection">Drives</a>
-                </button>
+                    </button>
+                }
             }
             else
             {
@@ -86,13 +91,15 @@
     @* Represents folders *@
     @foreach (var dir in ProgramSettings.GetFolders(@Model.directory))
     {
-        string[] paths = dir.Split('\\');
+        string[] paths = dir.Split('\\');;
+        if(ProgramSettings.runtime != "Windows") { paths =  dir.Split('/'); }
+
         string lastPath = "";
         <div class="form-group row">
             <div class="col">
                 <button type="submit" form="form1" name="dir" class="form-control d-flex" value="@dir">
                     <img src="~/images/regular/folder.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
-                    <a href="Browse?dir=@dir">@dir</a>
+                    <a href="Browse?dir=@dir">@paths[paths.Count()-1]</a>
                 </button>
             </div>
         </div>
@@ -106,7 +113,7 @@
             <div class="col">
                 <button type="submit" form="form1" name="dir" class="form-control d-flex" value="@dir">
                     <img src="~/images/regular/file.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
-                    <a href="Browse?dir=@dir">@dir</a>
+                    <a href="Browse?dir=@dir">@paths[paths.Count()-1]</a>
                 </button>
             </div>
         </div>

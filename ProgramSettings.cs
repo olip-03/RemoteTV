@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using RemoteTV.Models;
 
 namespace RemoteTV
 {
@@ -89,35 +90,47 @@ namespace RemoteTV
             }
             return true;
         }
+        // #everythingisasync <3
         public static async Task PlayMediaAsync(string dir)
         {
             await StopMedia();
-            isPlaying = true;
+            await Task.Run(async () => {
+                isPlaying = true;
 
-            ProcessStartInfo startInfo = new ProcessStartInfo();        
-            proc.StartInfo.FileName = @"hacktv";
+                // Generate args
+                string args = $"-m g -f {broadcastFrequency * 1000000} -s 16000000 -g {TXGain} ";
+                if(TXRFAmp) { args += "--amp "; }
+                args += "--nonicam --nocolour ";
+                args += $"\"{dir}\"";
+                Console.WriteLine(args);
 
-            // Generate args
-            string args = $"-m g -f {broadcastFrequency * 1000000} -s 16000000 -g {TXGain} ";
-            if(TXRFAmp) { args += "--amp "; }
-            args += $"\"{dir}\"";
-            Console.WriteLine(args);
-
-            proc.StartInfo.Arguments = args;
-            proc.Start();
+                await Bash("hacktv " + args);
+            });
         }
         public static async Task StopMedia()
         {
-            if(isPlaying)
-            {
-                proc.Kill();
-                foreach (var process in Process.GetProcessesByName("hacktv"))
-                {
-                    process.Kill();
-                }
-            }
-            await Task.Delay(250);
+            Console.WriteLine("Killing media...");
+            await Bash("pkill hacktv");
             isPlaying = false;
+        }
+        public static async Task Bash(string cmd)
+        {
+            await Task.Run(() => {
+                var escapedArgs = cmd.Replace("\"", "\\\"");
+
+                var process = new Process()
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = "/bin/bash",
+                        Arguments = $"-c \"{escapedArgs}\"",
+                        RedirectStandardOutput = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = true,
+                    }
+                };
+                process.Start();
+            });
         }
     }
 }

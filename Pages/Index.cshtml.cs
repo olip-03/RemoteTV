@@ -16,4 +16,14 @@ public class IndexModel : PageModel
     {
         
     }
+    public void OnPost()
+    {
+        ProgramSettings.StopMedia();
+    }
+    [HttpPost]
+    public ActionResult StopMedia() 
+    {
+        ProgramSettings.StopMedia();
+        return Page();
+    }
 }
