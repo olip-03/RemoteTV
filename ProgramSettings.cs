@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Linq;
 using RemoteTV.Models;
 
 namespace RemoteTV
@@ -9,14 +10,13 @@ namespace RemoteTV
         public static string mediaDirectory = @"/";
         public static float broadcastFrequency = 46.25f;
         public static bool TXRFAmp = false;
-        public static int TXGain = 0;
+        public static int TXGain = 20;
         public static string runtime = "Linux";
 
         public static bool isPlaying = false;
-        private static Process proc = new Process();
 
-        public static List<String> folders = new List<String>();
-        public static List<String> files = new List<String>();
+        public static List<String> folders = new();
+        public static List<String> files = new();
 
         public static void SetMediaDirectory(string setDirectory)
         {
@@ -44,7 +44,7 @@ namespace RemoteTV
             }   
             return false;
         }
-        public static string GetParent(string directory)
+        public static string? GetParent(string directory)
         {
             return Directory.GetParent(directory).FullName;
         }
@@ -89,6 +89,59 @@ namespace RemoteTV
                 return false;
             }
             return true;
+        }
+        public static string GetFileType(string directory)
+        {
+            string filetype = "File";
+            FileInfo fi = new(directory);  
+            string[] videoFileFormats = { ".mp4", ".mov", ".avi", ".wmv", ".mkv", ".flv", ".webm", ".m4v", ".mpeg", ".3gp" };
+            string[] imageFileFormats = { ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".ico", ".svg" };
+            string[] codeFileFormats = { ".cs", ".java", ".cpp", ".py", ".html", ".css", ".js", ".php", ".swift", ".rb", ".go", ".ts", ".vb", ".pl", ".lua", ".scala", ".rust", ".r", ".matlab" };
+            string[] excelFileFormats = { ".xlsx", ".xls", ".xlsm", ".xlsb", ".csv" };
+            string[] textFileFormats = { ".txt", ".doc", ".docx", ".rtf", ".csv" };
+            string[] pdfFileFormats = { ".pdf" };
+            string[] powerpointFileFormats = { ".pptx", ".ppt", ".pps", ".ppsx" };
+            string[] wordFileFormats = { ".docx", ".doc", ".rtf", ".txt" };
+            string[] zipFileFormats = { ".zip", ".rar", ".7z", ".tar", ".gz" };
+
+            if(Array.IndexOf(videoFileFormats, fi.Extension) > -1)
+            {
+                filetype = "Video";
+            }
+            if(Array.IndexOf(imageFileFormats, fi.Extension) > -1)
+            {
+                filetype = "Image";
+            }
+            if(Array.IndexOf(codeFileFormats, fi.Extension) > -1)
+            {
+                filetype = "Code";
+            }
+            if(Array.IndexOf(excelFileFormats, fi.Extension) > -1)
+            {
+                filetype = "Code";
+            }
+            if(Array.IndexOf(textFileFormats, fi.Extension) > -1)
+            {
+                filetype = "Text";
+            }
+            if(Array.IndexOf(pdfFileFormats, fi.Extension) > -1)
+            {
+                filetype = "PDF";
+            }
+            if(Array.IndexOf(powerpointFileFormats, fi.Extension) > -1)
+            {
+                filetype = "PowerPoint";
+            }
+            if(Array.IndexOf(wordFileFormats, fi.Extension) > -1)
+            {
+                filetype = "Word";
+            }
+            if(Array.IndexOf(zipFileFormats, fi.Extension) > -1)
+            {
+                filetype = "Zip";
+            }
+            
+            return filetype;
         }
         // #everythingisasync <3
         public static async Task PlayMediaAsync(string dir)

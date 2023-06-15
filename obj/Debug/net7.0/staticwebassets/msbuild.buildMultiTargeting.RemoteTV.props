@@ -1,3 +1,3 @@
 ﻿<Project>
-  <Import Project="../build/RemoteTV.props" />
+  <Import Project="..\build\RemoteTV.props" />
 </Project>

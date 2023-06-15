@@ -1,0 +1,43 @@
+@if(@Model != null)
+{
+    string filetype = ProgramSettings.GetFileType(@Model); 
+    switch(filetype) 
+    {
+        case "File":
+                <img src="~/images/regular/file-code.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
+            break;
+        case "Audio":
+                <img src="~/images/regular/file-audio.svg.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
+            break;
+        case "Code":
+                <img src="~/images/regular/file-code.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
+            break;
+        case "Excel":
+                <img src="~/images/regular/file-excel.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
+            break;
+        case "Image":
+                <img src="~/images/regular/file-image.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
+            break;
+        case "Lines":
+                <img src="~/images/regular/file-lines.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
+            break;
+        case "PDF":
+                <img src="~/images/regular/file-pdf.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
+            break;
+        case "PowerPoint":
+                <img src="~/images/regular/file-powerpoint.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
+            break;
+        case "Video":
+                <img src="~/images/regular/file-video.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
+            break;
+        case "Word":
+                <img src="~/images/regular/file-word.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
+            break;
+        case "Zip":
+                <img src="~/images/regular/file-zipper.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
+            break;
+        default:
+                <img src="~/images/regular/file.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
+            break;
+    }
+}

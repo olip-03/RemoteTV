@@ -54,7 +54,7 @@
             <div class="col">
                 <button type="submit" form="form1" name="dir" class="form-control d-flex" value="@dir">
                     <img src="~/images/regular/hard-drive.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
-                    <a href="Browse?dir=@dir">@dir</a>
+                    <a href="Browse?dir=@dir" class="text-decoration-none text-black" style="font-size: 2vh;">@dir</a>
                 </button>
             </div>
         </div>
@@ -73,7 +73,7 @@
                 {
                     <button type="submit" form="form1" name="dir" class="form-control d-flex" value="driveSelection">
                     <img src="~/images/regular/hard-drive.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
-                    <a href="Browse?dir=driveSelection">Drives</a>
+                    <a href="Browse?dir=driveSelection" class="text-decoration-none text-black" style="font-size: 2vh;">Drives</a>
                     </button>
                 }
             }
@@ -82,7 +82,7 @@
                 string parent = ProgramSettings.GetParent(@Model.directory);
                 <button type="submit" form="form1" name="dir" class="form-control d-flex" value="@parent">
                     <img src="~/images/regular/circle-left.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
-                    <a href="Browse?dir=@parent">@parent</a>
+                    <a href="Browse?dir=@parent" class="text-decoration-none text-black" style="font-size: 2vh;">@parent</a>
                 </button>
             }
         </div>
@@ -98,8 +98,8 @@
         <div class="form-group row">
             <div class="col">
                 <button type="submit" form="form1" name="dir" class="form-control d-flex" value="@dir">
-                    <img src="~/images/regular/folder.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
-                    <a href="Browse?dir=@dir">@paths[paths.Count()-1]</a>
+                    <img src="~/images/regular/folder-open.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
+                    <a href="Browse?dir=@dir" class="text-decoration-none text-black" style="font-size: 2vh;">@paths[paths.Count()-1]</a>
                 </button>
             </div>
         </div>
@@ -112,8 +112,8 @@
         <div class="form-group row">
             <div class="col">
                 <button type="submit" form="form1" name="dir" class="form-control d-flex" value="@dir">
-                    <img src="~/images/regular/file.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
-                    <a href="Browse?dir=@dir">@paths[paths.Count()-1]</a>
+                    @Html.Partial("InsertFileImage", dir)
+                    <a href="Browse?dir=@dir" class="text-decoration-none text-black" style="font-size: 2vh;">@paths[paths.Count()-1]</a>
                 </button>
             </div>
         </div>

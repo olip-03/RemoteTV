@@ -27,6 +27,11 @@ namespace RemoteTV.Pages.Browse
                 directory = ProgramSettings.mediaDirectory;
             }
 
+            if(directory == "driveSelection")
+            {
+                return Page();
+            }
+
             if(ProgramSettings.isFile(directory))
             {
                 await ProgramSettings.PlayMediaAsync(dir);

@@ -8,6 +8,9 @@ ProgramSettings.UpdateFolders();
 if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
 {
     ProgramSettings.runtime = "Windows";
+    string? path = Path.GetPathRoot(Environment.SystemDirectory);
+    if(path != null)
+        ProgramSettings.SetMediaDirectory(path);
 }
 
 // Add services to the container.

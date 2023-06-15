@@ -1,25 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "/home/tv/Documents/RemoteTV/RemoteTV.csproj": {}
+    "C:\\Users\\Oli\\source\\repos\\RemoteTV\\RemoteTV.csproj": {}
   },
   "projects": {
-    "/home/tv/Documents/RemoteTV/RemoteTV.csproj": {
+    "C:\\Users\\Oli\\source\\repos\\RemoteTV\\RemoteTV.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/tv/Documents/RemoteTV/RemoteTV.csproj",
+        "projectUniqueName": "C:\\Users\\Oli\\source\\repos\\RemoteTV\\RemoteTV.csproj",
         "projectName": "RemoteTV",
-        "projectPath": "/home/tv/Documents/RemoteTV/RemoteTV.csproj",
-        "packagesPath": "/home/tv/.nuget/packages/",
-        "outputPath": "/home/tv/Documents/RemoteTV/obj/",
+        "projectPath": "C:\\Users\\Oli\\source\\repos\\RemoteTV\\RemoteTV.csproj",
+        "packagesPath": "C:\\Users\\Oli\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Oli\\source\\repos\\RemoteTV\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Users\\Oli\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder",
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/tv/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Oli\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Oli\\AppData\\Roaming\\NuGet\\config\\Godot.Offline.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -56,7 +64,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.105/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

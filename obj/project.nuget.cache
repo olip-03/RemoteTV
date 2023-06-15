@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9hh5KtgRRqUs6FZUexjuvGMraZNy496Vq5nMKQU73FnIO9JY0aEhyK3/8n+TVZu0Sy7LgVQqkI7VoViYTEmdlQ==",
+  "dgSpecHash": "/N8cBXOK1jdPyaBR2Xm+K6+AlQfFbiJHl3ziQ0Zo/dZxRRbmFE7WS7LfPc+Ckv1JTVHqfJOUUVneF23uNEoxag==",
   "success": true,
-  "projectFilePath": "/home/tv/Documents/RemoteTV/RemoteTV.csproj",
+  "projectFilePath": "C:\\Users\\Oli\\source\\repos\\RemoteTV\\RemoteTV.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
