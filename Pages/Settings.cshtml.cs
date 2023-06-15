@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using RemoteTV.Models;
 
 namespace RemoteTV.Pages;
 
@@ -43,5 +44,7 @@ public class SettingsObject
     public float broadcastFrequency { get; set;}
     public bool TXRFAmp { get; set; } = false;
     public int TXGain { get; set; } = 10;
+    public  bool hideNonPlayableFiles = true;
+    public List<AlarmModel> alarms = new();
 }
 

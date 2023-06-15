@@ -1,0 +1,259 @@
+Usage: hacktv [options] input [input...]
+
+  -o, --output <target>          Set the output device or file, Default: hackrf
+  -m, --mode <name>              Set the television mode. Default: i
+  -s, --samplerate <value>       Set the sample rate in Hz. Default: 16MHz
+      --pixelrate <value>        Set the video pixel rate in Hz. Default: Sample rate
+  -l, --level <value>            Set the output level. Default: 1.0
+  -D, --deviation <value>        Override the mode's FM peak deviation. (Hz)
+  -G, --gamma <value>            Override the mode's gamma correction value.
+  -i, --interlace                Update image each field instead of each frame.
+  -r, --repeat                   Repeat the inputs forever.
+  -v, --verbose                  Enable verbose output.
+      --teletext <path>          Enable teletext output. (625 line modes only)
+      --wss <mode>               Enable WSS output. (625 line modes only)
+      --videocrypt <mode>        Enable Videocrypt I scrambling. (PAL only)
+      --videocrypt2 <mode>       Enable Videocrypt II scrambling. (PAL only)
+      --videocrypts <mode>       Enable Videocrypt S scrambling. (PAL only)
+      --syster                   Enable Nagravision Syster scambling. (PAL only)
+      --systeraudio              Invert the audio spectrum when using Syster.
+      --acp                      Enable Analogue Copy Protection signal.
+      --vits                     Enable VITS test signals.
+      --vitc                     Enable VITC time code.
+      --filter                   Enable experimental VSB modulation filter.
+      --nocolour                 Disable the colour subcarrier (PAL, SECAM, NTSC only).
+      --noaudio                  Suppress all audio subcarriers.
+      --nonicam                  Disable the NICAM subcarrier if present.
+      --a2stereo                 Enable Zweikanalton / A2 Stereo, disables NICAM.
+      --single-cut               Enable D/D2-MAC single cut video scrambling.
+      --double-cut               Enable D/D2-MAC double cut video scrambling.
+      --eurocrypt <mode>         Enable Eurocrypt conditional access for D/D2-MAC.
+      --scramble-audio           Scramble audio data when using D/D2-MAC modes.
+      --chid <id>                Set the channel ID (D/D2-MAC).
+      --mac-audio-stereo         Use stereo audio (D/D2-MAC). (Default)
+      --mac-audio-mono           Use mono audio (D/D2-MAC).
+      --mac-audio-high-quality   Use high quality 32 kHz audio (D/D2-MAC).
+                                 (Default)
+      --mac-audio-medium-quality Use medium quality 16 kHz audio (D/D2-MAC).
+      --mac-audio-companded      Use companded audio compression (D/D2-MAC).
+                                 (Default)
+      --mac-audio-linear         Use linear audio. (D/D2-MAC).
+      --mac-audio-l1-protection  Use first level protection (D/D2-MAC).
+                                 (Default)
+      --mac-audio-l2-protection  Use second level protection (D/D2-MAC).
+      --offset <value>           Add a frequency offset in Hz (Complex modes only).
+      --passthru <file>          Read and add an int16 complex signal.
+      --invert-video             Invert the composite video signal sync and
+                                 white levels.
+      --secam-field-id           Enable SECAM field identification.
+
+Input options
+
+  test:colourbars    Generate and transmit a test pattern.
+  ffmpeg:<file|url>  Decode and transmit a video file with ffmpeg.
+
+  If no valid input prefix is provided, ffmpeg: is assumed.
+
+ffmpeg input options
+
+      --ffmt <format>            Force input file format.
+      --fopts <option=value[:option2=value]>
+                                 Pass option(s) to ffmpeg.
+
+HackRF output options
+
+  -o, --output hackrf[:<serial>] Open a HackRF for output.
+  -f, --frequency <value>        Set the RF frequency in Hz, 0MHz to 7250MHz.
+  -a, --amp                      Enable the TX RF amplifier.
+  -g, --gain <value>             Set the TX VGA (IF) gain, 0-47dB. Default: 0dB
+
+  Only modes with a complex output are supported by the HackRF.
+
+SoapySDR output options
+
+  -o, --output soapysdr[:<opts>] Open a SoapySDR device for output.
+  -f, --frequency <value>        Set the RF frequency in Hz.
+  -g, --gain <value>             Set the TX level. Default: 0dB
+  -A, --antenna <name>           Set the antenna.
+
+fl2k output options
+
+  -o, --output fl2k[:<dev>]      Open an fl2k device for output.
+
+  Real signals are output on the Red channel. Complex signals are output
+  on the Red (I) and Green (Q) channels.
+
+  The 0.7v p-p voltage level of the FL2K is too low to create a correct
+  composite video signal, it will appear too dark without amplification.
+
+File output options
+
+  -o, --output file:<filename>   Open a file for output. Use - for stdout.
+  -t, --type <type>              Set the file data type.
+
+Supported file types:
+
+  uint8
+  int8
+  uint16
+  int16
+  int32
+  float
+
+  The default output is int16. The TV mode will determine if the output
+  is real or complex.
+
+  If no valid output prefix is provided, file: is assumed.
+
+Supported television modes:
+
+  i             = PAL colour, 25 fps, 625 lines, AM (complex), 6.0 MHz FM audio
+  b, g          = PAL colour, 25 fps, 625 lines, AM (complex), 5.5 MHz FM audio
+  pal-d, pal-k  = PAL colour, 25 fps, 625 lines, AM (complex), 6.5 MHz FM audio
+  pal-fm        = PAL colour, 25 fps, 625 lines, FM (complex), 6.5 MHz FM audio
+  pal           = PAL colour, 25 fps, 625 lines, unmodulated (real)
+  pal-m         = PAL colour, 30/1.001 fps, 525 lines, AM (complex), 4.5 MHz FM audio
+  525pal        = PAL colour, 30/1.001 fps, 525 lines, unmodulated (real)
+  m             = NTSC colour, 30/1.001 fps, 525 lines, AM (complex), 4.5 MHz FM audio
+  ntsc-fm       = NTSC colour, 30/1.001 fps, 525 lines, FM (complex), 6.5 MHz FM audio
+  ntsc-bs       = NTSC colour, 30/1.001 fps, 525 lines, FM (complex), BS digital audio
+  ntsc          = NTSC colour, 30/1.001 fps, 525 lines, unmodulated (real)
+  l             = SECAM colour, 25 fps, 625 lines, AM (complex), 6.5 MHz AM
+                  audio
+  d, k          = SECAM colour, 25 fps, 625 lines, AM (complex), 6.5 MHz FM
+                  audio
+  secam-i       = SECAM colour, 25 fps, 625 lines, AM (complex), 6.0 MHz FM audio
+  secam-fm      = SECAM colour, 25 fps, 625 lines, FM (complex), 6.5 MHz FM audio
+  secam         = SECAM colour, 25 fps, 625 lines, unmodulated (real)
+  d2mac-fm      = D2-MAC, 25 fps, 625 lines, FM (complex)
+  d2mac-am      = D2-MAC, 25 fps, 625 lines, AM (complex)
+  d2mac         = D2-MAC, 25 fps, 625 lines, unmodulated (real)
+  dmac-fm       = D-MAC, 25 fps, 625 lines, FM (complex)
+  dmac-am       = D-MAC, 25 fps, 625 lines, AM (complex)
+  dmac          = D-MAC, 25 fps, 625 lines, unmodulated (real)
+  e             = No colour, 25 fps, 819 lines, AM (complex)
+  819           = No colour, 25 fps, 819 lines, unmodulated (real)
+  a             = No colour, 25 fps, 405 lines, AM (complex)
+  405           = No colour, 25 fps, 405 lines, unmodulated (real)
+  240-am        = No colour, 25 fps, 240 lines, AM (complex)
+  240           = No colour, 25 fps, 240 lines, unmodulated (real)
+  30-am         = No colour, 12.5 fps, 30 lines, AM (complex)
+  30            = No colour, 12.5 fps, 30 lines, unmodulated (real)
+  nbtv-am       = No colour, 12.5 fps, 32 lines, AM (complex)
+  nbtv          = No colour, 12.5 fps, 32 lines, unmodulated (real)
+  apollo-fsc-fm = Field sequential colour, 30/1.001 fps, 525 lines, FM (complex)
+                  1.25 MHz FM audio
+  apollo-fsc    = Field sequential colour, 30/1.001 fps, 525 lines, unmodulated
+                  (real)
+  apollo-fm     = No colour, 10 fps, 320 lines, FM (complex), 1.25 MHz FM audio
+  apollo        = No colour, 10 fps, 320 lines, unmodulated (real)
+  m-cbs405      = Field sequential colour, 72 fps, 405 lines, VSB (complex),
+                  4.5MHz FM audio
+  cbs405        = Field sequential colour, 72 fps, 405 lines, unmodulated (real)
+
+NOTE: The number of samples per line is rounded to the nearest integer,
+which may result in a slight frame rate error.
+
+For modes which include audio you also need to ensure the sample rate
+is adequate to contain both the video signal and audio subcarriers.
+
+16MHz works well with PAL modes, and 13.5MHz for NTSC modes.
+
+20.25MHz is ideal for the D/D2-MAC modes, but may not work with all hackrfs.
+
+Teletext
+
+Teletext is a digital information service transmitted within the VBI lines of
+the video signal. Developed in the UK in the 1970s, it was used throughout
+much of Europe until the end of analogue TV in the 2010s.
+
+hacktv supports TTI files. The path can be either a single file or a
+directory. All files in the directory will be loaded.
+
+Raw packet sources are also supported with the raw:<source> path name.
+The input is expected to be 42 byte teletext packets. Use - for stdin.
+
+Lines 7-22 and 320-335 are used, 16 lines per field.
+
+Teletext support in hacktv is only compatible with 625 line PAL modes.
+NTSC and SECAM variations exist and may be supported in the future.
+
+WSS (Widescreen Signaling)
+
+WSS provides a method to signal to a TV the intended aspect ratio of
+the video. The following modes are supported:
+
+  4:3            = Video is 4:3.
+  16:9           = Video is 16:9 (Anamorphic).
+  14:9-letterbox = Crop a 4:3 video to 14:9.
+  16:9-letterbox = Crop a 4:3 video to 16:9.
+  auto           = Automatically switch between 4:3 and 16:9.
+
+Currently only supported in 625 line modes. A 525 line variant exists and
+may be supported in future.
+
+Videocrypt I
+
+A video scrambling system used by the Sky TV analogue satellite service in
+the UK in the 1990s. Each line of the image is cut at a point determined by
+a pseudorandom number generator, then the two parts are swapped.
+
+hacktv supports the following modes:
+
+  free        = Free-access, no subscription card is required to decode.
+  conditional = A valid Sky card is required to decode. Sample data from MTV.
+
+Videocrypt is only compatible with 625 line PAL modes. This version
+works best when used with samples rates at multiples of 14MHz.
+
+Videocrypt II
+
+A variation of Videocrypt I used throughout Europe. The scrambling method is
+identical to VC1, but has a higher VBI data rate.
+
+hacktv supports the following modes:
+
+  free        = Free-access, no subscription card is required to decode.
+
+Both VC1 and VC2 cannot be used together except if both are in free-access mode.
+
+Videocrypt S
+
+A variation of Videocrypt II used on the short lived BBC Select service. This
+mode uses line-shuffling rather than line cut-and-rotate.
+
+hacktv supports the following modes:
+
+  free        = Free-access, no subscription card is required to decode.
+  conditional = A valid BBC Select card is required to decode. (Does not work yet)
+
+Audio inversion is not yet supported.
+
+Nagravision Syster
+
+Another video scrambling system used in the 1990s in Europe. The video lines
+are vertically shuffled within a field.
+
+Syster is only compatible with 625 line PAL modes and does not currently work
+with most hardware.
+
+Some decoders will invert the audio around 12.8 kHz. For these devices you need
+to use the --systeraudio option.
+
+Eurocrypt
+
+Conditional access (CA) system used by D/D2MAC services, M and S2 versions are
+supported.
+
+hacktv supports the following modes:
+
+  filmnet     = (M) A valid FilmNet card is required to decode.
+  tv1000      = (M) A valid Viasat card is required to decode.
+  ctv         = (M) A valid CTV card is required to decode.
+  ctvs        = (S) A valid CTV card is required to decode.
+  tvplus      = (M) A valid TV Plus (Netherlands) card is required to decode.
+  tvs         = (S) A valid TVS (Denmark) card is required to decode.
+  rdv         = (S) A valid RDV card is required to decode.
+  nrk         = (S) A valid NRK card is required to decode.
+
+MultiMac style cards can also be used.

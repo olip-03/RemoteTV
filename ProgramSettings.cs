@@ -11,9 +11,13 @@ namespace RemoteTV
         public static float broadcastFrequency = 46.25f;
         public static bool TXRFAmp = false;
         public static int TXGain = 20;
-        public static string runtime = "Linux";
+        public static bool hideNonPlayableFiles = true;
+        public static List<AlarmModel> alarms = new(); 
 
+        public static string runtime = "Linux";
         public static bool isPlaying = false;
+        public static float currentPlaytime = 0;
+        public static float currentFileLength = 0;
 
         public static List<String> folders = new();
         public static List<String> files = new();
@@ -48,9 +52,40 @@ namespace RemoteTV
         {
             return Directory.GetParent(directory).FullName;
         }
+        public static async Task SaveData() 
+        {
+            await Task.Run(() => {
+
+            }); 
+        }
+        public static async Task LoadDate() 
+        {
+            await Task.Run(() => {
+
+            }); 
+        }
         public static List<String> GetFiles(string directory)
         {
-            return Directory.GetFiles(directory).ToList();
+            List<string> returnFiles = Directory.GetFiles(directory).ToList();
+            if(hideNonPlayableFiles)
+            {
+                List<string> modiFiles = new(returnFiles);
+                foreach (string file in returnFiles)
+                {
+                    FileInfo fileInfo = new(file);
+                    string type = GetFileType(fileInfo.Extension);
+                    // fuck fix this
+                    if(type != "Video")
+                    {
+                        if(type != "Audio")
+                        {
+                            modiFiles.Remove(file);
+                        }  
+                    }
+                }
+                return modiFiles;
+            }
+            return returnFiles;
         }
         public static List<String> GetFolders(string directory)
         {
@@ -94,6 +129,7 @@ namespace RemoteTV
         {
             string filetype = "File";
             FileInfo fi = new(directory);  
+            string[] audioFileFormats = { ".mp3", ".wav", ".flac", ".aac", ".wma", ".ogg", ".m4a" };
             string[] videoFileFormats = { ".mp4", ".mov", ".avi", ".wmv", ".mkv", ".flv", ".webm", ".m4v", ".mpeg", ".3gp" };
             string[] imageFileFormats = { ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".ico", ".svg" };
             string[] codeFileFormats = { ".cs", ".java", ".cpp", ".py", ".html", ".css", ".js", ".php", ".swift", ".rb", ".go", ".ts", ".vb", ".pl", ".lua", ".scala", ".rust", ".r", ".matlab" };
@@ -104,6 +140,10 @@ namespace RemoteTV
             string[] wordFileFormats = { ".docx", ".doc", ".rtf", ".txt" };
             string[] zipFileFormats = { ".zip", ".rar", ".7z", ".tar", ".gz" };
 
+            if(Array.IndexOf(audioFileFormats, fi.Extension) > -1)
+            {
+                filetype = "Audio";
+            }
             if(Array.IndexOf(videoFileFormats, fi.Extension) > -1)
             {
                 filetype = "Video";
@@ -165,6 +205,16 @@ namespace RemoteTV
             Console.WriteLine("Killing media...");
             await Bash("pkill hacktv");
             isPlaying = false;
+        }
+        // this is the shittest way of doing this
+        // except it works so ??? 
+        public static async Task PauseStream(){
+            string pid = "hacktv process ID";
+            await Bash($"pkill -s SIGSTOP {pid}");
+        }
+        public static async Task ResumeStream(){
+            string pid = "hacktv process ID";
+            await Bash($"pkill -s SIGSTOP {pid}");
         }
         public static async Task Bash(string cmd)
         {
