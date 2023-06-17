@@ -21,7 +21,7 @@ namespace RemoteTV
 
         public static List<String> folders = new();
         public static List<String> files = new();
-
+        public static int processId = 0;
         public static void SetMediaDirectory(string setDirectory)
         {
             mediaDirectory = setDirectory;
@@ -232,7 +232,9 @@ namespace RemoteTV
                         CreateNoWindow = true,
                     }
                 };
+                
                 process.Start();
+                processId = process.Id;
             });
         }
     }

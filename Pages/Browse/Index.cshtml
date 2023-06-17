@@ -44,6 +44,9 @@
     return;
 }
 <h2>@Model.directory</h2>
+<input class="form-control" id="myInput" type="text" placeholder="Search..">
+<br>
+
 @if (@Model.directory == "driveSelection" && ProgramSettings.runtime == "Windows")
 { // Only if we're also running windows :)
     @foreach (var dir in ProgramSettings.GetDrives())
@@ -88,34 +91,47 @@
         </div>
     </div>
 
-    @* Represents folders *@
-    @foreach (var dir in ProgramSettings.GetFolders(@Model.directory))
-    {
-        string[] paths = dir.Split('\\');;
-        if(ProgramSettings.runtime != "Windows") { paths =  dir.Split('/'); }
+    <div id="searchbox">
+        @* Represents folders *@
+        @foreach (var dir in ProgramSettings.GetFolders(@Model.directory))
+        {
+            string[] paths = dir.Split('\\');;
+            if(ProgramSettings.runtime != "Windows") { paths =  dir.Split('/'); }
 
-        string lastPath = "";
-        <div class="form-group row">
-            <div class="col">
-                <button type="submit" form="form1" name="dir" class="form-control d-flex" value="@dir">
-                    <img src="~/images/regular/folder-closed.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
-                    <a href="Browse?dir=@dir" class="text-decoration-none text-black" style="font-size: 2vh;">@paths[paths.Count()-1]</a>
-                </button>
+            string lastPath = "";
+            <div class="form-group row">
+                <div class="col">
+                    <button type="submit" form="form1" name="dir" class="form-control d-flex" value="@dir">
+                        <img src="~/images/regular/folder-closed.svg" style="height: 30px; width: 30px; margin: 0px 10px 0px 0px">
+                        <a href="Browse?dir=@dir" class="text-decoration-none text-black" style="font-size: 2vh;">@paths[paths.Count()-1]</a>
+                    </button>
+                </div>
             </div>
-        </div>
-    }
+        }
 
-    @* Represents files *@
-    @foreach (var dir in ProgramSettings.GetFiles(@Model.directory))
-    {
-        string[] paths = dir.Split('\\');
-        <div class="form-group row">
-            <div class="col">
-                <button type="submit" form="form1" name="dir" class="form-control d-flex" value="@dir">
-                    @Html.Partial("InsertFileImage", dir)
-                    <a href="Browse?dir=@dir" class="text-decoration-none text-black" style="font-size: 2vh;">@paths[paths.Count()-1]</a>
-                </button>
+        @* Represents files *@
+        @foreach (var dir in ProgramSettings.GetFiles(@Model.directory))
+        {
+            string[] paths = dir.Split('\\');
+            <div class="form-group row">
+                <div class="col">
+                    <button type="submit" form="form1" name="dir" class="form-control d-flex" value="@dir">
+                        @Html.Partial("Browse/InsertFileImage", dir)
+                        <a href="Browse?dir=@dir" class="text-decoration-none text-black" style="font-size: 2vh;">@paths[paths.Count()-1]</a>
+                    </button>
+                </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 </form>
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#searchbox *").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
