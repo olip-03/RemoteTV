@@ -8,123 +8,47 @@
 <form method="post">
     <div class="d-flex align-items-start">
         <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <button class="nav-link active" id="v-pills-access-tab" data-bs-toggle="pill" data-bs-target="#v-pills-access" type="button" role="tab" aria-controls="v-pills-access" aria-selected="true">Accounts And Access</button>
-            <button class="nav-link" id="v-pills-output-tab" data-bs-toggle="pill" data-bs-target="#v-pills-output" type="button" role="tab" aria-controls="v-pills-output" aria-selected="false">Output</button>
-            <button class="nav-link" id="v-pills-browser-tab" data-bs-toggle="pill" data-bs-target="#v-pills-browser" type="button" role="tab" aria-controls="v-pills-browser" aria-selected="false">Folder Browser</button>
-            <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</button>
+            <button class="nav-link active" id="v-pills-access-tab" data-bs-toggle="pill"
+                data-bs-target="#v-pills-access" type="button" role="tab" aria-controls="v-pills-access"
+                aria-selected="true">Accounts And Access</button>
+            <button class="nav-link" id="v-pills-output-tab" data-bs-toggle="pill" data-bs-target="#v-pills-output"
+                type="button" role="tab" aria-controls="v-pills-output" aria-selected="false">Output</button>
+            <button class="nav-link" id="v-pills-browser-tab" data-bs-toggle="pill" data-bs-target="#v-pills-browser"
+                type="button" role="tab" aria-controls="v-pills-browser" aria-selected="false">Folder Browser</button>
+            <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings"
+                type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</button>
+            <input class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill"
+                type="submit" role="tab" aria-controls="v-pills-settings" aria-selected="true" value="Save All"/>
         </div>
         <div class="tab-content" id="v-pills-tabContent">
-            <div class="tab-pane fade show active" id="v-pills-access" role="tabpanel" aria-labelledby="v-pills-access-tab">
-            @* Tab Panel for Accounts And Access*@
-                <div class="form-group row">
-                    <div class="col-3">
-                        <label asp-for="settings.password">Login Password:</label>
-                    </div>
-                    <div class="col">
-                        <input type="text" class="form-control" asp-for="settings.password" value="@ProgramSettings.loginPassword"/>
-                    </div>
-                </div><br>
+            <div class="tab-pane fade show active" id="v-pills-access" role="tabpanel"
+                aria-labelledby="v-pills-access-tab">
+                @* Tab Panel for Accounts And Access*@
 
-                <div class="form-group row">
-                    <div class="col-3">
-                        <label asp-for="settings.mediaDirectory">Media Directory:</label>
-                    </div>
-                    <div class="col">
-                        <input type="text" class="form-control" asp-for="settings.mediaDirectory" value="@ProgramSettings.mediaDirectory"/>
-                    </div>
-                </div>
-            @* End of Accounts And Access Tab Panel*@    
+                @* End of Accounts And Access Tab Panel*@
             </div>
             <div class="tab-pane fade" id="v-pills-output" role="tabpanel" aria-labelledby="v-pills-output-tab">
-            @* Tab Panel for Output *@
+                @* Tab Panel for Output *@
                 @* You can keep adding these as they are required *@
                 <h3>Video Mode Options</h3>
-                <div class="form-group form-check form-check-inline row">
-                    <div class="form-check col">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                        <label class="form-check-label" for="exampleRadios1">
-                            PAL
-                        </label>
+                @foreach (var mode in Model.videoModes)
+                {
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="videoMode" id="videoMode" asp-for="videoMode" value="@mode">
+                        <label class="form-check-label" for="inlineRadio1">@mode</label>
                     </div>
-                    <div class="form-check col">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                        <label class="form-check-label" for="exampleRadios2">
-                            NTSC
-                        </label>
-                    </div>
-                    <div class="form-check col">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
-                        <label class="form-check-label" for="exampleRadios3">
-                            SECAM
-                        </label>
-                    </div>
-
-                    <div class="form-check col">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
-                        <label class="form-check-label" for="exampleRadios3">
-                            Black and White
-                        </label>
-                    </div>
-
-                    <div class="form-check col">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
-                        <label class="form-check-label" for="exampleRadios3">
-                            MAC
-                            </label>
-                        </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="inputState">Television Mode</label>
-                    <select id="inputState" class="form-control">
-                        <option selected>PAL-I - 25 fps, 625 lines, AM (complex), 6.0 MHz FM audio</option>
-                        <option>PAL-B/G - 25 fps, 625 lines, AM (complex), 5.5 MHz FM audio</option>
-                    </select>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-3">
-                        <label asp-for="settings.broadcastFrequency">Broadcast Frequency:</label>
-                    </div>
-                    <div class="col">
-                        <input type="number" step=0.01 class="form-control" asp-for="settings.broadcastFrequency" value="@ProgramSettings.broadcastFrequency"/>
-                    </div>
-                </div><br>
-
-                <div class="form-group row">
-                    <div class="col-5">
-                        <input class="form-check-input" type="checkbox" asp-for="settings.TXRFAmp" value="@ProgramSettings.TXRFAmp" id="flexCheckChecked" checked>
-                        <label class="form-check-label" for="flexCheckChecked" asp-for="settings.TXRFAmp">
-                            TX RF Amplification
-                        </label>
-                    </div>
-                </div><br>
-
-                <div class="form-group row">
-                    <div class="col-3">
-                        <label asp-for="settings.TXGain">TX Gain:</label>
-                    </div>
-                    <div class="col">
-                        <input type="number" step=0.01 class="form-control" asp-for="settings.TXGain" value="@ProgramSettings.TXGain"/>
-                    </div>
-                </div><br>
-
-                <div class="form-group row">
-                    <div class="col-3">
-                        <input type="submit" class="btn btn-primary" value="Save All">
-                    </div>
-                </div>
-            @* End of Output Tab Panel*@   
+                }
+                @* End of Output Tab Panel*@
             </div>
             <div class="tab-pane fade" id="v-pills-browser" role="tabpanel" aria-labelledby="v-pills-browser-tab">
-            @* Tab Panel for *@
-            
-            @* End of Tab Panel*@   
+                @* Tab Panel for *@
+
+                @* End of Tab Panel*@
             </div>
             <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
-            @* Tab Panel for *@
+                @* Tab Panel for *@
 
-            @* End of Tab Panel*@   
+                @* End of Tab Panel*@
             </div>
         </div>
     </div>

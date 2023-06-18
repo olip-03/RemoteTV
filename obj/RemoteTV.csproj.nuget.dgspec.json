@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Oli\\source\\repos\\RemoteTV\\RemoteTV.csproj": {}
+    "c:\\Users\\Oli\\source\\repos\\RemoteTV\\RemoteTV.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Oli\\source\\repos\\RemoteTV\\RemoteTV.csproj": {
+    "c:\\Users\\Oli\\source\\repos\\RemoteTV\\RemoteTV.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Oli\\source\\repos\\RemoteTV\\RemoteTV.csproj",
+        "projectUniqueName": "c:\\Users\\Oli\\source\\repos\\RemoteTV\\RemoteTV.csproj",
         "projectName": "RemoteTV",
-        "projectPath": "C:\\Users\\Oli\\source\\repos\\RemoteTV\\RemoteTV.csproj",
+        "projectPath": "c:\\Users\\Oli\\source\\repos\\RemoteTV\\RemoteTV.csproj",
         "packagesPath": "C:\\Users\\Oli\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Oli\\source\\repos\\RemoteTV\\obj\\",
+        "outputPath": "c:\\Users\\Oli\\source\\repos\\RemoteTV\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Users\\Oli\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder",
