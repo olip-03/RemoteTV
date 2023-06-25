@@ -17,8 +17,8 @@
                 type="button" role="tab" aria-controls="v-pills-browser" aria-selected="false">Folder Browser</button>
             <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings"
                 type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</button>
-            <input class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill"
-                type="submit" role="tab" aria-controls="v-pills-settings" aria-selected="true" value="Save All"/>
+            <input class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" type="submit" role="tab"
+                aria-controls="v-pills-settings" aria-selected="true" value="Save All" />
         </div>
         <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-access" role="tabpanel"
@@ -30,14 +30,40 @@
             <div class="tab-pane fade" id="v-pills-output" role="tabpanel" aria-labelledby="v-pills-output-tab">
                 @* Tab Panel for Output *@
                 @* You can keep adding these as they are required *@
-                <h3>Video Mode Options</h3>
-                @foreach (var mode in Model.videoModes)
-                {
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="videoMode" id="videoMode" asp-for="videoMode" value="@mode">
-                        <label class="form-check-label" for="inlineRadio1">@mode</label>
+                <h3>Video Mode Options</h3>      
+                <div class="nav nav-tabs" role="tablist">      
+                    @{int count = 0;}
+                    @foreach (var mode in Model.VideoModes)
+                    {
+                        if(count == 0)
+                        {
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="videoMode" id="videoMode-@mode" data-target="#@mode" asp-for="VideoMode" checked value="@mode">
+                                <label class="form-check-label" for="videoMode-@mode">@mode</label>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="videoMode" id="videoMode-@mode" data-target="#@mode" asp-for="VideoMode" value="@mode">
+                                <label class="form-check-label" for="videoMode-@mode">@mode</label>
+                            </div>
+                        }
+                        count++;
+                    }
+                    <div class="tab-content">
+                        @foreach (var mode in Model.VideoModes)
+                        {
+                            <div id="@mode" class="tab-pane active">
+                                @Html.DropDownListFor(m => m.DisplayVideoFormats, 
+                                new SelectList(Model.DisplayVideoFormats, Model.SelectedVideoFormat),
+                                "- "+ mode + " Television Formats -",
+                                new { @class = "form-control" }
+                                )
+                            </div>
+                        }
                     </div>
-                }
+                </div>  
                 @* End of Output Tab Panel*@
             </div>
             <div class="tab-pane fade" id="v-pills-browser" role="tabpanel" aria-labelledby="v-pills-browser-tab">
@@ -53,3 +79,12 @@
         </div>
     </div>
 </form>
+
+<script>
+    $(document).ready(function () {
+        $('input[name="videoMode"]').click(function () {
+            $(this).tab('show');
+            $(this).removeClass('active');
+        });
+    })
+</script>

@@ -9,49 +9,49 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = RemoteTV
 build_property.RootNamespace = RemoteTV
-build_property.ProjectDir = c:\Users\Oli\source\repos\RemoteTV\
+build_property.ProjectDir = C:\Users\Oli\source\repos\RemoteTV\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = c:\Users\Oli\source\repos\RemoteTV
+build_property.MSBuildProjectDirectory = C:\Users\Oli\source\repos\RemoteTV
 build_property._RazorSourceGeneratorDebug = 
 
-[c:/Users/Oli/source/repos/RemoteTV/Pages/Auth/Login.cshtml]
+[C:/Users/Oli/source/repos/RemoteTV/Pages/Auth/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Oli/source/repos/RemoteTV/Pages/Browse/Index.cshtml]
+[C:/Users/Oli/source/repos/RemoteTV/Pages/Browse/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQnJvd3NlXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Oli/source/repos/RemoteTV/Pages/Browse/InsertFileImage.cshtml]
+[C:/Users/Oli/source/repos/RemoteTV/Pages/Browse/InsertFileImage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQnJvd3NlXEluc2VydEZpbGVJbWFnZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Oli/source/repos/RemoteTV/Pages/Error.cshtml]
+[C:/Users/Oli/source/repos/RemoteTV/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Oli/source/repos/RemoteTV/Pages/Index.cshtml]
+[C:/Users/Oli/source/repos/RemoteTV/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Oli/source/repos/RemoteTV/Pages/Settings.cshtml]
+[C:/Users/Oli/source/repos/RemoteTV/Pages/Settings.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2V0dGluZ3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Oli/source/repos/RemoteTV/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Oli/source/repos/RemoteTV/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Oli/source/repos/RemoteTV/Pages/_ViewImports.cshtml]
+[C:/Users/Oli/source/repos/RemoteTV/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Oli/source/repos/RemoteTV/Pages/_ViewStart.cshtml]
+[C:/Users/Oli/source/repos/RemoteTV/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Oli/source/repos/RemoteTV/Pages/Shared/_Layout.cshtml]
+[C:/Users/Oli/source/repos/RemoteTV/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-zoy8myfywv

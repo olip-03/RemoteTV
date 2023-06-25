@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Oli\\source\\repos\\RemoteTV\\RemoteTV.csproj": {}
+    "C:\\Users\\Oli\\source\\repos\\RemoteTV\\RemoteTV.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Oli\\source\\repos\\RemoteTV\\RemoteTV.csproj": {
+    "C:\\Users\\Oli\\source\\repos\\RemoteTV\\RemoteTV.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Oli\\source\\repos\\RemoteTV\\RemoteTV.csproj",
+        "projectUniqueName": "C:\\Users\\Oli\\source\\repos\\RemoteTV\\RemoteTV.csproj",
         "projectName": "RemoteTV",
-        "projectPath": "c:\\Users\\Oli\\source\\repos\\RemoteTV\\RemoteTV.csproj",
+        "projectPath": "C:\\Users\\Oli\\source\\repos\\RemoteTV\\RemoteTV.csproj",
         "packagesPath": "C:\\Users\\Oli\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Oli\\source\\repos\\RemoteTV\\obj\\",
+        "outputPath": "C:\\Users\\Oli\\source\\repos\\RemoteTV\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Users\\Oli\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder",
@@ -28,6 +28,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -64,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }

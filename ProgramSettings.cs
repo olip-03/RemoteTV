@@ -18,6 +18,7 @@ namespace RemoteTV
         public static bool isPlaying = false;
         public static float currentPlaytime = 0;
         public static float currentFileLength = 0;
+        public static string SelectedVideoFormat = "";
 
         public static List<String> folders = new();
         public static List<String> files = new();
